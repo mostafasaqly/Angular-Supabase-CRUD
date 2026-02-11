@@ -1,0 +1,80 @@
+<div class="ov">
+  <div class="ov__head">
+    <div>
+      <h2 class="ov__title">Overview</h2>
+      <p class="ov__sub">Your tasks summary at a glance.</p>
+    </div>
+
+    <button class="btn btn--ghost" (click)="load()" [disabled]="loading()">
+      Refresh
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="state state--loading">Loading…</div>
+  }
+
+  @if (error()) {
+    <div class="state state--error">{{ error() }}</div>
+  }
+
+  <div class="grid">
+    <section class="card kpi">
+      <div class="kpi__label">Total tasks</div>
+      <div class="kpi__value">{{ total() }}</div>
+      <div class="kpi__hint">All created tasks</div>
+    </section>
+
+    <section class="card kpi">
+      <div class="kpi__label">Done</div>
+      <div class="kpi__value">{{ done() }}</div>
+      <div class="kpi__hint">Completed tasks</div>
+    </section>
+
+    <section class="card kpi">
+      <div class="kpi__label">Pending</div>
+      <div class="kpi__value">{{ pending() }}</div>
+      <div class="kpi__hint">Still in progress</div>
+    </section>
+  </div>
+
+  <section class="card progress">
+    <div class="progress__top">
+      <div>
+        <div class="progress__title">Completion</div>
+        <div class="progress__sub">Done / Total</div>
+      </div>
+      <div class="progress__pct">{{ doneRatio() | percent:'1.0-0' }}</div>
+    </div>
+
+    <div class="bar" aria-label="progress">
+      <div class="bar__fill" [style.width.%]="doneRatio() * 100"></div>
+    </div>
+  </section>
+
+  <section class="card recent">
+    <div class="recent__head">
+      <div class="recent__title">Recent tasks</div>
+      <a class="link btn btn--ghost" routerLink="/app/tasks">View all</a>
+    </div>
+
+    @if (recent().length === 0) {
+      <div class="empty">No tasks yet.</div>
+    } @else {
+      <ul class="recent__list">
+        @for (t of recent(); track t.id) {
+          <li class="recent__item">
+            <div class="dot" [class.is-done]="t.done"></div>
+            <div class="recent__body">
+              <div class="recent__name" [class.is-done]="t.done">{{ t.title }}</div>
+              <div class="recent__meta">{{ t.created_at | date:'short' }}</div>
+            </div>
+            <div class="pill" [class.is-done]="t.done">
+              {{ t.done ? 'Done' : 'Pending' }}
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+</div>

@@ -1,0 +1,60 @@
+<div class="st">
+  <div class="st__head">
+    <div>
+      <h2 class="st__title">Settings</h2>
+      <p class="st__sub">Manage your account and security.</p>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <section class="card">
+    <div class="card__head">
+      <div class="card__title">Profile</div>
+      <div class="card__sub">Your basic account information.</div>
+    </div>
+
+    <div class="kv">
+      <div class="kv__item">
+        <div class="kv__k">Email</div>
+        <div class="kv__v">{{ userEmail() || '—' }}</div>
+      </div>
+      <div class="kv__item">
+        <div class="kv__k">User ID</div>
+        <div class="kv__v mono">{{ userId() || '—' }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="card">
+    <div class="card__head">
+      <div class="card__title">Security</div>
+      <div class="card__sub">Update your password.</div>
+    </div>
+
+    @if (err()) {
+      <div class="alert alert--err">{{ err() }}</div>
+    }
+
+    @if (msg()) {
+      <div class="alert alert--ok">{{ msg() }}</div>
+    }
+
+    <div class="row">
+      <input
+        class="input"
+        type="password"
+        placeholder="New password (min 6 chars)"
+        [ngModel]="newPassword()"
+        (ngModelChange)="newPassword.set($event)"
+        [disabled]="saving()"
+      />
+
+      <button class="btn btn--primary" (click)="changePassword()" [disabled]="saving()">
+        @if (saving()) { Saving… } @else { Update password }
+      </button>
+    </div>
+  </section>
+
+
+</div>

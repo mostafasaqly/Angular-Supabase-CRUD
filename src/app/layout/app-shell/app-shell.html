@@ -1,0 +1,38 @@
+<div class="shell">
+  <aside class="shell__sidebar">
+    <div class="brand">
+      <div class="brand__logo">SaaS</div>
+      <div class="brand__sub">Mini Dashboard</div>
+    </div>
+
+    <nav class="nav">
+      @for (item of nav; track item.link) {
+        <a class="nav__item"
+           [routerLink]="item.link"
+           routerLinkActive="is-active"
+           [routerLinkActiveOptions]="{ exact: true }">
+          @if (item.icon) { <i class="nav__icon" [class]="item.icon"></i> }
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <header class="shell__header">
+    <div class="header__left">
+      <div class="header__title">{{ activeTitle() }}</div>
+    </div>
+
+    <div class="header__right">
+      <div class="user">
+        <div class="user__email">{{ userEmail() }}</div>
+      </div>
+
+      <button class="btn btn--ghost" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="shell__content">
+    <router-outlet />
+  </main>
+</div>

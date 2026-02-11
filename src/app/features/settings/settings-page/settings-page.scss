@@ -1,0 +1,172 @@
+.st {
+  display: grid;
+  gap: 14px;
+  max-width: 860px;
+}
+
+.st__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.st__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.st__sub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e7edf5;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+.card--danger {
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.card__head {
+  margin-bottom: 12px;
+}
+
+.card__title {
+  font-weight: 800;
+}
+
+.card__sub {
+  font-size: 12px;
+  opacity: 0.65;
+  margin-top: 4px;
+}
+
+.kv {
+  display: grid;
+  gap: 10px;
+}
+
+.kv__item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.kv__k {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.kv__v {
+  font-weight: 600;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+  }
+
+  &:disabled {
+    background: #f3f4f6;
+  }
+}
+
+.alert {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-bottom: 10px;
+
+  &--err {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  &--ok {
+    background: #dcfce7;
+    color: #166534;
+  }
+}
+
+.danger {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  transition: 0.15s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background: #4f46e5;
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: #4338ca;
+    }
+  }
+
+  &--danger {
+    background: #dc2626;
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: #b91c1c;
+    }
+  }
+
+  &--ghost {
+    background: #f3f4f6;
+
+    &:hover:not(:disabled) {
+      background: #e5e7eb;
+    }
+  }
+}

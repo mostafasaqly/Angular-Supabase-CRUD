@@ -1,0 +1,46 @@
+<div style="max-width: 420px; margin: 60px auto; font-family: system-ui;">
+  <h2 style="margin: 0 0 10px;">
+    @if (mode() === 'login') { Sign in } @else { Create account }
+  </h2>
+
+  @if (error()) {
+    <div style="color:#b91c1c; background:#fee2e2; padding:10px 12px; border-radius:10px; margin-bottom:12px;">
+      {{ error() }}
+    </div>
+  }
+
+  <div style="display:grid; gap: 10px;">
+    <input
+      [ngModel]="email()"
+      (ngModelChange)="email.set($event)"
+      placeholder="Email"
+      style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px;"
+    />
+
+    <input
+      type="password"
+      [ngModel]="password()"
+      (ngModelChange)="password.set($event)"
+      placeholder="Password"
+      style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px;"
+    />
+
+    <button
+      (click)="submit()"
+      [disabled]="loading()"
+      style="padding:10px 12px; border-radius:10px; border:none; background:#4f46e5; color:white; cursor:pointer;"
+    >
+      @if (loading()) { Loading… } @else {
+        @if (mode() === 'login') { Sign in } @else { Sign up }
+      }
+    </button>
+
+    <button
+      type="button"
+      (click)="toggleMode()"
+      style="padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; background:white; cursor:pointer;"
+    >
+      @if (mode() === 'login') { I need an account } @else { I already have an account }
+    </button>
+  </div>
+</div>

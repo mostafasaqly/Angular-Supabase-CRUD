@@ -1,0 +1,91 @@
+<div class="tasks-page">
+  <div class="tasks-head">
+  <div>
+    <h2 class="tasks-title">Tasks</h2>
+  </div>
+
+</div>
+
+
+  @if (loading()) {
+    <div class="state state--loading">Loading…</div>
+  }
+
+  @if (error()) {
+    <div class="state state--error">
+      {{ error() }}
+    </div>
+  }
+
+  @if (!loading() && tasks().length === 0) {
+    <div class="state state--empty">No tasks yet.</div>
+  }
+
+  <!-- Add Row -->
+  <div class="add-row">
+    <input
+      class="input"
+      [ngModel]="newTitle()"
+      (ngModelChange)="newTitle.set($event)"
+      placeholder="New task title…"
+      [disabled]="adding()"
+      (keyup.enter)="add()"
+    />
+
+    <button class="btn btn--primary" (click)="add()" [disabled]="adding()">
+      @if (adding()) {
+        <span class="spinner"></span>
+        Adding...
+      } @else {
+        Add
+      }
+    </button>
+  </div>
+
+  <!-- List -->
+  <ul class="task-list">
+    @for (t of tasks(); track t.id) {
+      <li class="task-item">
+        <div class="task-left">
+          <input
+            type="checkbox"
+            [checked]="t.done"
+            [disabled]="togglingId() === t.id"
+            (change)="toggle(t)"
+          />
+
+          <span class="task-title-text" [class.is-done]="t.done">
+            {{ t.title }}
+          </span>
+
+          @if (togglingId() === t.id) {
+            <span class="badge">Saving…</span>
+          }
+        </div>
+
+        <div class="task-right">
+          <small class="task-date">
+            {{ t.created_at | date: 'short' }}
+          </small>
+
+          <button
+            class="btn btn--danger btn--sm"
+            (click)="del(t)"
+            [disabled]="deletingId() === t.id"
+          >
+            @if (deletingId() === t.id) {
+              <span class="spinner spinner--sm"></span>
+              Deleting…
+            } @else {
+              Delete
+            }
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+
+  <div class="refresh-row">
+    <button class="btn btn--primary" (click)="load()" [disabled]="loading()">Refresh</button>
+  </div>
+</div>
